@@ -73,3 +73,40 @@ body {
   background-color: var(--navy);
   color: white;
 }
+.dashboard-slot {
+  height: 95px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dashboard-slot:hover {
+  transform: scale(1.03);
+}
+
+.slot-available {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.slot-occupied {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.slot-highlight {
+  border: 3px solid var(--amber);
+  box-shadow: 0 0 10px rgba(244, 180, 0, 0.9);
+}
+
+.progress-bar {
+  background-color: var(--amber);
+  color: var(--navy);
+  font-weight: bold;
+}
