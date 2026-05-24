@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/SmartPark/static/css/main.7b88d2fb.css",
+    "main.js": "/SmartPark/static/js/main.b785f736.js",
+    "static/media/SmartPark.png": "/SmartPark/static/media/SmartPark.e9eb84a512ddd48c5dff.png",
+    "static/media/bootstrap-icons.woff?": "/SmartPark/static/media/bootstrap-icons.1295669cd4e305c97f2c.woff",
+    "static/media/bootstrap-icons.woff2?": "/SmartPark/static/media/bootstrap-icons.92ea18a81d737146ff04.woff2",
+    "index.html": "/SmartPark/index.html",
+    "main.7b88d2fb.css.map": "/SmartPark/static/css/main.7b88d2fb.css.map",
+    "main.b785f736.js.map": "/SmartPark/static/js/main.b785f736.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7b88d2fb.css",
+    "static/js/main.b785f736.js"
+  ]
+}
