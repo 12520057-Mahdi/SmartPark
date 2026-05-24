@@ -83,7 +83,8 @@ function Dashboard() {
         return {
           ...slot,
           occupied: true,
-          plate: normalizedPlate, type: vehicleType,
+          plate: normalizedPlate, 
+          type: vehicleType,
           time: new Date().toLocaleTimeString(),
           entryTimestamp: Date.now()
         };
@@ -149,8 +150,7 @@ const price = rates[selectedSlot.type] * parkedHours;
     };
 
     setSlots(updatedSlots);
-    setRevenue(revenue + price);
-    setHistory([transaction, ...history]);
+setRevenue(prevRevenue => prevRevenue + price);    setHistory([transaction, ...history]);
     setMessage('Vehicle released successfully.');
   };
 
@@ -297,8 +297,7 @@ const price = rates[selectedSlot.type] * parkedHours;
                         (slot.occupied ? 'slot-occupied ' : 'slot-available ') +
                         (isHighlighted ? 'slot-highlight' : '')
                       }
-                      onClick={() => releaseSpot(slot.id)}
-                    >
+onClick={() => slot.occupied && releaseSpot(slot.id)}                    >
                       <div>
                         Slot {slot.id}
                         <br />

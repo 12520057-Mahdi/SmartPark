@@ -12,7 +12,7 @@ function Services() {
             <i className="bi bi-pencil-square fs-1 text-warning"></i>
             <h4>Digital Vehicle Registration</h4>
 <p>Register incoming vehicles quickly using plate number and vehicle type.</p>
-            <h5 className="text-warning">Sedan: $5</h5>
+            <h5 className="text-warning">Sedan: $5/hour</h5>
           </div>
         </div>
 
@@ -21,7 +21,7 @@ function Services() {
             <i className="bi bi-camera-video-fill fs-1 text-warning"></i>
 <h4>Live Parking Monitoring</h4>
 <p>View available and occupied parking slots through a clear visual layout.</p>
-            <h5 className="text-warning">SUV: $10</h5>
+            <h5 className="text-warning">SUV: $10/hour</h5>
           </div>
         </div>
 
@@ -30,7 +30,7 @@ function Services() {
             <i className="bi bi-clipboard-data-fill fs-1 text-warning"></i>
 <h4>Parking Activity Reports</h4>
 <p>Review revenue and transaction history to support daily parking control.</p>
-            <h5 className="text-warning">Truck: $15</h5>
+            <h5 className="text-warning">Truck: $15/hour</h5>
           </div>
         </div>
       </div>
