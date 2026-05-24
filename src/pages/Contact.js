@@ -28,7 +28,11 @@ function Contact() {
       setSuccess('');
       return;
     }
-
+if (!/\S+@\S+\.\S+/.test(formData.email.trim())) {
+  setError('Enter a valid email address.');
+  setSuccess('');
+  return;
+}
     setError('');
     setSuccess('Message submitted successfully.');
 

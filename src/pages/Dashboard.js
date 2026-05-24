@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Dashboard() {
   const rates = {
@@ -16,22 +16,44 @@ function Dashboard() {
         occupied: false,
         plate: '',
         type: '',
-        time: ''
+        time: '',
+        entryTimestamp: null
       });
     }
 
     return slots;
   };
 
-  const [slots, setSlots] = useState(createSlots());
   const [plate, setPlate] = useState('');
   const [vehicleType, setVehicleType] = useState('sedan');
-  const [revenue, setRevenue] = useState(0);
-  const [history, setHistory] = useState([]);
   const [searchPlate, setSearchPlate] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [message, setMessage] = useState('');
+  const [slots, setSlots] = useState(() => {
+    const savedSlots = localStorage.getItem('smartpark_slots');
+    return savedSlots ? JSON.parse(savedSlots) : createSlots();
+  });
 
+  const [revenue, setRevenue] = useState(() => {
+    const savedRevenue = localStorage.getItem('smartpark_revenue');
+    return savedRevenue ? JSON.parse(savedRevenue) : 0;
+  });
+
+  const [history, setHistory] = useState(() => {
+    const savedHistory = localStorage.getItem('smartpark_history');
+    return savedHistory ? JSON.parse(savedHistory) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem('smartpark_slots', JSON.stringify(slots));
+  }, [slots]);
+
+  useEffect(() => {
+    localStorage.setItem('smartpark_revenue', JSON.stringify(revenue));
+  }, [revenue]);
+
+  useEffect(() => {
+    localStorage.setItem('smartpark_history', JSON.stringify(history));
+  }, [history]);
   const occupiedCount = slots.filter(slot => slot.occupied).length;
   const availableCount = 20 - occupiedCount;
   const occupancyPercent = Math.round((occupiedCount / 20) * 100);
@@ -43,7 +65,12 @@ function Dashboard() {
       setMessage('Plate number must be at least 3 characters.');
       return;
     }
+    const normalizedPlate = plate.trim().toUpperCase();
 
+    if (slots.some(slot => slot.occupied && slot.plate === normalizedPlate)) {
+      setMessage('This plate is already parked.');
+      return;
+    }
     const freeSlot = slots.find(slot => !slot.occupied);
 
     if (!freeSlot) {
@@ -56,9 +83,9 @@ function Dashboard() {
         return {
           ...slot,
           occupied: true,
-          plate: plate.toUpperCase(),
-          type: vehicleType,
-          time: new Date().toLocaleTimeString()
+          plate: normalizedPlate, type: vehicleType,
+          time: new Date().toLocaleTimeString(),
+          entryTimestamp: Date.now()
         };
       }
 
@@ -78,11 +105,21 @@ function Dashboard() {
       return;
     }
 
-    const price = rates[selectedSlot.type];
+const exitTimestamp = Date.now();
 
+let parkedHours = 1;
+
+if (selectedSlot.entryTimestamp) {
+  const parkedMilliseconds = exitTimestamp - selectedSlot.entryTimestamp;
+  parkedHours = Math.max(1, Math.ceil(parkedMilliseconds / (1000 * 60 * 60)));
+}
+
+const price = rates[selectedSlot.type] * parkedHours;
     const confirmExit = window.confirm(
-      'Vehicle ' + selectedSlot.plate + ' entered at ' + selectedSlot.time + '. Confirm payment of $' + price + '?'
-    );
+      'Vehicle ' + selectedSlot.plate +
+      ' entered at ' + selectedSlot.time +
+      '. Parked hours: ' + parkedHours +
+      '. Confirm payment of $' + price + '?');
 
     if (!confirmExit) {
       return;
@@ -95,7 +132,8 @@ function Dashboard() {
           occupied: false,
           plate: '',
           type: '',
-          time: ''
+          time: '',
+          entryTimestamp: null
         };
       }
 
@@ -105,6 +143,7 @@ function Dashboard() {
     const transaction = {
       plate: selectedSlot.plate,
       type: selectedSlot.type,
+      hours: parkedHours,
       amount: price,
       time: new Date().toLocaleTimeString()
     };
@@ -140,8 +179,10 @@ function Dashboard() {
 
   return (
     <div className="container mt-5">
-      <h1 className="section-title text-center mb-4">SmartPark Dashboard</h1>
-
+      <h1 className="section-title text-center mb-4">
+        <i className="bi bi-speedometer2 me-2"></i>
+        SmartPark Dashboard
+      </h1>
       {message && <div className="alert alert-info">{message}</div>}
 
       <div className="row g-4">
@@ -168,9 +209,9 @@ function Dashboard() {
                   value={vehicleType}
                   onChange={(e) => setVehicleType(e.target.value)}
                 >
-                  <option value="sedan">Sedan ($5)</option>
-                  <option value="suv">SUV ($10)</option>
-                  <option value="truck">Truck ($15)</option>
+                  <option value="sedan">Sedan ($5/hr)</option>
+<option value="suv">SUV ($10/hr)</option>
+<option value="truck">Truck ($15/hr)</option>
                 </select>
               </div>
 
@@ -180,12 +221,39 @@ function Dashboard() {
             </form>
           </div>
 
-          <div className="card smart-card p-4 mt-4">
+          <div className="card smart-card dashboard-summary p-4 mt-4">
             <h4>Today's Summary</h4>
-            <p>Total Revenue: <strong>${revenue}</strong></p>
-            <p>Available Spots: <strong>{availableCount}/20</strong></p>
 
-            <label className="form-label">Live Occupancy</label>
+            <div className="row g-2 mt-2">
+              <div className="col-6 col-sm-6">                <div className="summary-box">
+                <p className="summary-label">Revenue</p>
+                <h5 className="summary-value">${revenue}</h5>
+              </div>
+              </div>
+
+              <div className="col-6 col-sm-6">
+                <div className="summary-box">
+                  <p className="summary-label">Available</p>
+                  <h5 className="summary-value">{availableCount}/20</h5>
+                </div>
+              </div>
+
+              <div className="col-6 col-sm-6">
+                <div className="summary-box">
+                  <p className="summary-label">Occupied</p>
+                  <h5 className="summary-value">{occupiedCount}</h5>
+                </div>
+              </div>
+
+              <div className="col-6 col-sm-6">
+                <div className="summary-box">
+                  <p className="summary-label">History</p>
+                  <h5 className="summary-value">{history.length}</h5>
+                </div>
+              </div>
+            </div>
+
+            <label className="form-label mt-4">Live Occupancy</label>
             <div className="progress">
               <div
                 className="progress-bar"
@@ -238,10 +306,10 @@ function Dashboard() {
                           <>
                             {slot.plate}
                             <br />
-                            <small>{slot.type}</small>
+                            <span className="badge-occupied">{slot.type}</span>
                           </>
                         ) : (
-                          <small>Empty</small>
+                          <span className="badge-available">Available</span>
                         )}
                       </div>
                     </div>
@@ -266,35 +334,39 @@ function Dashboard() {
                 <option value="truck">Truck</option>
               </select>
             </div>
+            <div className="table-responsive">
 
-            <table className="table table-bordered">
-              <thead className="table-dark">
-                <tr>
-                  <th>Plate</th>
-                  <th>Type</th>
-                  <th>Amount</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredHistory.length === 0 ? (
+              <table className="table table-bordered">
+                <thead className="table-dark">
                   <tr>
-                    <td colSpan="4" className="text-center">
-                      No transactions yet.
-                    </td>
+                    <th>Plate</th>
+                    <th>Type</th>
+                    <th>Hours</th>
+                    <th>Amount</th>
+                    <th>Time</th>
                   </tr>
-                ) : (
-                  filteredHistory.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.plate}</td>
-                      <td>{item.type}</td>
-                      <td>${item.amount}</td>
-                      <td>{item.time}</td>
+                </thead>
+                <tbody>
+                  {filteredHistory.length === 0 ? (
+                    <tr>
+                      <td colSpan="5" className="text-center">
+                        No transactions yet.
+                      </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                  ) : (
+                    filteredHistory.map((item, index) => (
+                      <tr key={`${item.plate}-${item.time}-${index}`}>  
+                        <td>{item.plate}</td>
+                        <td>{item.type}</td>
+                        <td>{item.hours}</td>
+                        <td>${item.amount}</td>
+                        <td>{item.time}</td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

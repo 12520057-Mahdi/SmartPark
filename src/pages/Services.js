@@ -9,24 +9,27 @@ function Services() {
       <div className="row g-4">
         <div className="col-md-4">
           <div className="card smart-card p-4 h-100">
-            <h4>Vehicle Entry</h4>
-            <p>Register incoming vehicles and assign available parking slots.</p>
+            <i className="bi bi-pencil-square fs-1 text-warning"></i>
+            <h4>Digital Vehicle Registration</h4>
+<p>Register incoming vehicles quickly using plate number and vehicle type.</p>
             <h5 className="text-warning">Sedan: $5</h5>
           </div>
         </div>
 
         <div className="col-md-4">
           <div className="card smart-card p-4 h-100">
-            <h4>Parking Monitoring</h4>
-            <p>Track occupied and available spaces using a visual dashboard.</p>
+            <i className="bi bi-camera-video-fill fs-1 text-warning"></i>
+<h4>Live Parking Monitoring</h4>
+<p>View available and occupied parking slots through a clear visual layout.</p>
             <h5 className="text-warning">SUV: $10</h5>
           </div>
         </div>
 
         <div className="col-md-4">
           <div className="card smart-card p-4 h-100">
-            <h4>Revenue Tracking</h4>
-            <p>View daily parking revenue and recent transaction history.</p>
+            <i className="bi bi-clipboard-data-fill fs-1 text-warning"></i>
+<h4>Parking Activity Reports</h4>
+<p>Review revenue and transaction history to support daily parking control.</p>
             <h5 className="text-warning">Truck: $15</h5>
           </div>
         </div>

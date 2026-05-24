@@ -9,6 +9,8 @@ function Reports() {
         <div className="col-md-4">
           <div className="card smart-card p-4 text-center h-100">
             <h3 className="stat-number">20</h3>
+                        <i className="bi bi-grid-3x3-gap-fill fs-1 text-warning"></i>
+
             <h5>Total Parking Slots</h5>
             <p>SmartPark currently manages a 20-slot parking area.</p>
           </div>
@@ -17,6 +19,8 @@ function Reports() {
         <div className="col-md-4">
           <div className="card smart-card p-4 text-center h-100">
             <h3 className="stat-number">3</h3>
+                        <i className="bi bi-car-front-fill fs-1 text-warning"></i>
+
             <h5>Vehicle Types</h5>
             <p>Sedan, SUV, and Truck categories are supported.</p>
           </div>
@@ -25,6 +29,8 @@ function Reports() {
         <div className="col-md-4">
           <div className="card smart-card p-4 text-center h-100">
             <h3 className="stat-number">Live</h3>
+                        <i className="bi bi-bar-chart-fill fs-1 text-warning"></i>
+
             <h5>Dashboard Data</h5>
             <p>Parking activity is updated directly inside the dashboard.</p>
           </div>
@@ -34,9 +40,9 @@ function Reports() {
       <div className="card smart-card p-4 mt-5">
         <h3>Report Overview</h3>
         <p>
-          The reports page gives a simple overview of the SmartPark system.
-          It summarizes the parking capacity, supported vehicle types, and
-          dashboard activity features.
+          The reports page provides a simple overview of SmartPark activity.
+It helps summarize parking capacity, supported vehicle categories,
+and the main information that can support daily parking decisions.
         </p>
 
         <table className="table table-bordered mt-3">
