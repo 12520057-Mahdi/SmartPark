@@ -18,7 +18,7 @@ import Reports from './pages/Reports';
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
 
       <NavBar />
 
