@@ -1,70 +1,169 @@
-# Getting Started with Create React App
+# SmartPark
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Student Name:** Mahdi Bassam Haidar  
+**Student ID:** 12520057  
+**Course:** CSCI390 Web Programming  
+**Project:** Phase 2 React Frontend Application  
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Project Description
 
-### `npm start`
+SmartPark is a React-based parking management web application designed to help organize parking spaces and simplify daily parking activity.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The application allows users to register vehicles, assign parking slots, monitor available and occupied spaces, calculate parking fees, view transaction history, and check daily reports.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This project is a continuation of the Phase 1 SmartPark website and was converted into a functional React frontend application for Phase 2.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Live Demo
 
-### `npm run build`
+GitHub Pages Link:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```text
+https://12520057-Mahdi.github.io/SmartPark
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Main Features
 
-### `npm run eject`
+- Responsive multi-page React application
+- Home, Dashboard, Reports, Services, About, and Contact pages
+- Parking slot management with 20 visual slots
+- Vehicle entry form with plate validation
+- Duplicate plate detection
+- Vehicle type pricing per hour
+- Live occupancy percentage with progress bar
+- Search by plate number
+- Transaction history table
+- Filter history by vehicle type
+- End-of-day reset
+- Reports page using saved dashboard data
+- Contact form with validation
+- Local storage persistence
+- Mobile-friendly navigation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies Used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- ReactJS
+- React Router
+- JavaScript
+- Bootstrap 5
+- Bootstrap Icons
+- HTML5
+- CSS3
+- Local Storage
+- Git and GitHub
+- GitHub Pages
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```text
+SmartPark/
+│
+├── public/
+│   └── index.html
+│
+├── src/
+│   ├── assets/
+│   │   └── SmartPark.png
+│   │
+│   ├── components/
+│   │   ├── NavBar.js
+│   │   └── Footer.js
+│   │
+│   ├── pages/
+│   │   ├── Home.js
+│   │   ├── Dashboard.js
+│   │   ├── Reports.js
+│   │   ├── Services.js
+│   │   ├── About.js
+│   │   └── Contact.js
+│   │
+│   ├── App.js
+│   ├── App.css
+│   └── index.js
+│
+├── package.json
+└── README.md
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Setup Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To run the project locally:
 
-### Analyzing the Bundle Size
+### 1. Clone the repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+git clone https://github.com/12520057-Mahdi/SmartPark.git
+```
 
-### Making a Progressive Web App
+### 2. Open the project folder
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+cd SmartPark
+```
 
-### Advanced Configuration
+### 3. Install dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm install
+```
 
-### Deployment
+### 4. Start the development server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+npm start
+```
 
-### `npm run build` fails to minify
+The project will open at:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```text
+http://localhost:3000
+```
+
+---
+
+## Deployment
+
+The project is deployed using GitHub Pages.
+
+Deployment command:
+
+```bash
+npm run deploy
+```
+
+---
+
+## Screenshots
+
+Screenshots are stored in the following folder:
+
+```text
+docs/screenshots/
+```
+
+Included screenshots:
+
+- Home page desktop view
+- Dashboard with parked vehicles
+- Reports page
+- Contact form validation
+- Mobile navbar view
+
+---
+
+## Notes
+
+SmartPark uses local storage to save dashboard data such as parking slots, revenue, and transaction history. This allows the application to keep its data even after refreshing the page.
+
+The application is frontend-only and does not use a backend database.
